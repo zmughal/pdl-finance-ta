@@ -12,6 +12,7 @@ if ( !$@ ) {
   my $alien = Alien::TALib->new;
   $libs   = $alien->libs_static // $alien->libs   if !defined $libs;
   $cflags = $alien->cflags if !defined $cflags;
+  $libs =~ s/-lta_lib\b/-lta_lib_a/ if $^O eq 'MSWin32';
 }
 else {
   warn "Alien::TALib not found, trying ta-lib-config\n";
